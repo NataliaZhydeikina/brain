@@ -19,11 +19,11 @@ const BrainMaterial = shaderMaterial(
         vProgress = smoothstep(-1., 1., sin(vUv.x*8.+time*3.));
         vec3 p = position;
         float maxDist = 0.05;
-        float dist = length(mouse.xy - vUv);
+        float dist = length(mouse - p);
         if(dist < maxDist) {
             vec3 dir = 0.5*normalize(mouse - p);
             dir*= (1. - dist/maxDist);
-            p -= dir;
+            p -= dir*0.03;
         }
         gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
       }
