@@ -20,7 +20,7 @@ export default function Tube({curve}: {curve: THREE.CatmullRomCurve3}) {
     });
 
     return <mesh>
-        <tubeGeometry args={[curve, 128, 0.001, 2, false]} />
+        <tubeGeometry args={[curve, curve.points.length*3, 0.005, 2, false]} />
         <brainMaterial 
         transparent={true}
         depthTest={false}

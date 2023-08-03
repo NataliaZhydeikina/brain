@@ -1,15 +1,18 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import { data } from './data';
 import Tubes from './components/Tubes';
 import BrainParticles from './components/BrainParticles';
 import * as THREE from 'three';
 
-const PATHS = data.economics[0].paths;
+const PATHS = data.my[0].paths;
 
 export default function App() {
   let brainCurves: Array<THREE.CatmullRomCurve3> = [];
-    
+  const texture = useGLTF('/hexagon3.glb');
+  console.log(PATHS.length)
+  // console.log(texture.scene.children[0].geometry.attributes.position.array.toString());
+  
     for (let j = 0; j < PATHS.length; j++) {
         let points = [];
         const path = PATHS[j];
@@ -23,13 +26,16 @@ export default function App() {
     }
 
   return (
-    <Canvas camera={{position:[0,0,0.3], near:0.001, far:5}}>
+    <Canvas camera={{position:[0,0,2], near:0.001, far:5}}>
       <color attach="background" args={["black"]} />
-      <Tubes curves={brainCurves} />
+      <Tubes curves={brainCurves} /> 
       <BrainParticles curves={brainCurves} />
       <ambientLight />
       <pointLight position={[10,10,10]} />
       <OrbitControls />
+      {/* <group dispose={null}>
+        <primitive object={texture.scenes[0]} />
+      </group> */}
     </Canvas>
   )
 }

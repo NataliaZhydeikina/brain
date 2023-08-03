@@ -12,7 +12,7 @@ const ParticalMaterial = shaderMaterial(
         vUv = uv;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-        gl_PointSize = randoms*3. * (1./ -mvPosition.z);
+        gl_PointSize = randoms*15. * (1./ -mvPosition.z);
       }
     `,
     // fragment shader
